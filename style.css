@@ -1,0 +1,29 @@
+body{
+    text-align: center;
+}
+.grid-container{
+    text-align: center;
+    border: 1px solid black;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.square-container{
+    display: block;
+    flex-grow: 1;
+    display: flex;
+}
+.square{
+    flex-grow: 1;
+}
+.grid-btn{
+    height: 50px;
+    margin-bottom: 10px;
+}
+.error-message{
+    color: red;
+}
+
