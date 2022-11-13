@@ -1,1 +1,1 @@
-# etch-and-sketch-2
+# etch-and-sketch-2e
