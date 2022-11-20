@@ -1,7 +1,10 @@
 const gridContainer = document.querySelector('.grid-container');
 const gridBtn = document.querySelector('.grid-btn'); 
 const errorMessage = document.createElement('p');
-
+const grayBtn = document.querySelector('.gray-btn');
+const colorBtn = document.querySelector('.color-btn');
+let color = 'rainbow';
+let gridSize = 4;
 
 function createGrid(size){
     for(let i = 0;  i < size; i++){
@@ -31,7 +34,7 @@ function hoverSquares(){
 }
 
 gridBtn.addEventListener('click', () => {
-    let gridSize = prompt('how many rows would you like the grid to be?', '');
+    gridSize = prompt('how many rows would you like the grid to be?', '');
     errorMessage.textContent = '';
     if(gridSize <= 100){
         setUpNewGrid(gridSize)
@@ -41,6 +44,19 @@ gridBtn.addEventListener('click', () => {
     }
     
 })
+colorBtn.addEventListener('click', ()=>{
+    color = 'rainbow';
+    setUpNewGrid(gridSize)
+    colorBtn.style.cssText = `background: gray`;
+    grayBtn.style.cssText = `background: white`;
+})
+grayBtn.addEventListener('click', ()=>{
+    color = 'gray';
+    grayBtn.style.cssText = `background: gray`;
+    colorBtn.style.cssText = `background: white`;
+    setUpNewGrid(gridSize);
+})
+
 
 function setUpNewGrid(size){
     removeChildren(gridContainer);
@@ -61,7 +77,8 @@ function setUpErrorMessage(){
 }
 
 function generateColor(square){
-    return returnRandomColor();
+    if(color == 'rainbow') return returnRandomColor(square);
+    else return returndarkerColor(square);
 }
 
 function getRandomNum(range){
@@ -74,6 +91,17 @@ function returnRandomColor(){
     let value3 = getRandomNum(255);
     return `rgb(${value1},${value2},${value3})`;
 }
+
+function returndarkerColor(square){
+    console.log(square);
+    let saturation = 90;
+    if(square.getAttribute("saturation")){
+        saturation = parseInt(square.getAttribute("saturation")) - 10;
+    }
+    square.setAttribute("saturation", saturation);
+    return `hsl(0, 0%, ${saturation}%)`;
+}
+
 
 createGrid(4);
 hoverSquares();
